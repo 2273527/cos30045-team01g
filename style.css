@@ -1,1 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
 
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  background-color: black;
+  color: gold;
+  padding: 10px;
+  text-align: center;
+}

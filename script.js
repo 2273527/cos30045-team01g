@@ -22,4 +22,47 @@ var innerHeight = height - margin.top - margin.bottom;
 d3.csv("psychiatrists_per_1000_clean.csv").then(function(data) {
   console.log("CSV loaded:");
   console.log(data);
+
+// Convert numbers
+data.forEach(function(d) {
+d.OBS_VALUE = +d.OBS_VALUE;
+});
+
+// Filter for year 2021
+var data2021 = data.filter(d => d.TIME_PERIOD === "2021");
+
+// X and Y scales
+var x = d3.scaleBand()
+.domain(data2021.map(d => d["Reference Area"]))
+.range([0, innerWidth])
+.padding(0.1);
+
+var y = d3.scaleLinear()
+.domain([0, d3.max(data2021, d => d.OBS_VALUE)])
+.nice()
+.range([innerHeight, 0]);
+
+// X Axis
+chartArea.append("g")
+.attr("transform", "translate(0," + innerHeight + ")")
+.call(d3.axisBottom(x))
+.selectAll("text")
+.attr("transform", "rotate(-45)")
+.style("text-anchor", "end");
+
+// Y Axis
+chartArea.append("g")
+.call(d3.axisLeft(y));
+
+// Draw the bars
+  chartArea.selectAll("rect")
+    .data(data2021)
+    .enter()
+    .append("rect")
+    .attr("x", d => x(d["Reference Area"]))
+    .attr("y", d => y(d.OBS_VALUE))
+    .attr("width", x.bandwidth())
+    .attr("height", d => innerHeight - y(d.OBS_VALUE))
+    .attr("fill", "steelblue");
+
 });

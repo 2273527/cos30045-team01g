@@ -64,6 +64,6 @@ chartArea.append("g")
     .attr("y", d => y(d.OBS_VALUE))
     .attr("width", x.bandwidth())
     .attr("height", d => innerHeight - y(d.OBS_VALUE))
-    .attr("fill", "steelblue");
+    .attr("fill", "orange");
 
 });

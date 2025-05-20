@@ -55,6 +55,23 @@ chartArea.append("g")
 chartArea.append("g")
 .call(d3.axisLeft(y));
 
+// X Axis Label
+svg.append("text")
+.attr("x", width / 2)
+.attr("y", height - 10)
+.attr("text-anchor", "middle")
+.style("font-size", "14px")
+.text("Country");
+
+// Y Axis Label
+svg.append("text")
+.attr("text-anchor", "middle")
+.attr("transform", "rotate(-90)")
+.attr("x", -height / 2)
+.attr("y", 20)
+.style("font-size", "14px")
+.text("Psychiatrists per 1,000 people");
+
 // Draw the bars
   chartArea.selectAll("rect")
     .data(data2021)

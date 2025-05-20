@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="description" content="OECD Mental Health Visualisation Team 01G"/>
-  <meta name="keywords" content="HTML, CSS, D3"/>
-  <meta name="author" content="Christopher Wade, Rahma Qureshi"/>
-  <title>OECD Mental Health Visualisation</title>
-  <link rel="stylesheet" href="style.css">
-  
-  <!-- Load D3.js library -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="7.4 Lab 1 D3 line and area charts"/>
+    <meta name="keywords" content="HTML, CSS"/>
+    <meta name="author" content="Rahma Qureshi"/>
+    <title>7.4 Lab 1 D3 line and area charts</title>
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://raw.githubusercontent.com/2273527/cos30045-team01g/refs/heads/main/functions.js"></script>
 </head>
 <body>
-
-  <h1>OECD Mental Health Access</h1>
-
-  <!-- Chart 1: Psychiatrists -->
-  <section>
-    <h2>Psychiatrists per 1,000 People</h2>
+    <!-- Create a div where the graph will take place -->
     <div id="chart"></div>
-  </section>
-
-<!-- Chart 2: Suicide Rate -->
-  <section>
-    <h2>Suicide Rate (Intentional self-harm per 100,000)</h2>
-    <div id="chart2"></div>
-  </section>
-
-  <footer>COS30045 Data Visualisation</footer>
-
-  <!-- Load script.js -->
-  <script src="script.js"></script>
+    <script>
+        // Call the function to create the graph
+        window.onload = function() {
+            init();
+        }
+    </script>
 </body>
 </html>

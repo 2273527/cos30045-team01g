@@ -2,8 +2,8 @@
 // Group 01G
 
 // Set the size of the SVG area
-var width = 800;
-var height = 500;
+var width = 1400;
+var height = 800;
 var margin = { top: 50, right: 30, bottom: 100, left: 60 };
 
 // Create the SVG element and add it to the page
@@ -30,8 +30,7 @@ d.OBS_VALUE = +d.OBS_VALUE;
 
 // Filter for year 2021
 var data2021 = data.filter(d => d.TIME_PERIOD === "2021");
-data2021 = data2021.slice(0, 10); // TEMP: show only 10 countries
-console.table(data2021);
+// data2021 = data2021.slice(0, 10); // Debug: shows only 10 countries
 
 // X and Y scales
 var x = d3.scaleBand()
@@ -49,7 +48,7 @@ chartArea.append("g")
 .attr("transform", "translate(0," + innerHeight + ")")
 .call(d3.axisBottom(x))
 .selectAll("text")
-.attr("transform", "rotate(-45)")
+.attr("transform", "rotate(-30)")
 .style("text-anchor", "end");
 
 // Y Axis

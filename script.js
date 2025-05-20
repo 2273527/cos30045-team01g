@@ -35,7 +35,7 @@ console.table(data2021);
 
 // X and Y scales
 var x = d3.scaleBand()
-.domain(data2021.map(d => d.LOCATION))
+.domain(data2021.map(d => d["Reference area"]))
 .range([0, innerWidth])
 .padding(0.1);
 
@@ -61,7 +61,7 @@ chartArea.append("g")
     .data(data2021)
     .enter()
     .append("rect")
- .attr("x", d => x(d.LOCATION))
+.attr("x", d => x(d["Reference area"]))
     .attr("y", d => y(d.OBS_VALUE))
     .attr("width", x.bandwidth())
     .attr("height", d => innerHeight - y(d.OBS_VALUE))

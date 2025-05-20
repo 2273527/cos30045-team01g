@@ -30,6 +30,7 @@ d.OBS_VALUE = +d.OBS_VALUE;
 
 // Filter for year 2021
 var data2021 = data.filter(d => d.TIME_PERIOD === "2021");
+data2021 = data2021.slice(0, 10); // TEMP: show only 10 countries
 
 // X and Y scales
 var x = d3.scaleBand()

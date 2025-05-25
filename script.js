@@ -81,7 +81,7 @@ svg.append("text")
     .attr("y", d => y(d.OBS_VALUE))
     .attr("width", x.bandwidth())
     .attr("height", d => innerHeight - y(d.OBS_VALUE))
-    .attr("fill", "blue");
+    .attr("fill", "skyblue");
 
 // Add value labels above bars
 chartArea.selectAll(".label")

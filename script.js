@@ -83,4 +83,16 @@ svg.append("text")
     .attr("height", d => innerHeight - y(d.OBS_VALUE))
     .attr("fill", "orange");
 
+// Add value labels above bars
+chartArea.selectAll(".label")
+  .data(data2021)
+  .enter()
+  .append("text")
+  .attr("class", "label")
+  .attr("x", d => x(d["Reference area"]) + x.bandwidth() / 2)
+  .attr("y", d => y(d.OBS_VALUE) - 5)
+  .attr("text-anchor", "middle")
+  .style("fill", "black")
+  .text(d => d.OBS_VALUE.toFixed(2));
+
 });

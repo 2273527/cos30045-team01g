@@ -1,6 +1,8 @@
 // COS30045 Data Visualisation
 // Group 01G
 
+function drawPsychiatristsChart(data2021) {
+
 // Set the size of the SVG area
 var width = 1400;
 var height = 800;
@@ -19,7 +21,6 @@ var innerWidth = width - margin.left - margin.right;
 var innerHeight = height - margin.top - margin.bottom;
 
 // Load psychiatrists data
-d3.csv("psychiatrists_per_1000_clean.csv").then(function(data) {
   console.log("CSV loaded:");
   console.log(data);
 
@@ -94,20 +95,14 @@ chartArea.selectAll(".label")
   .attr("text-anchor", "middle")
   .style("fill", "black")
   .text(d => d.OBS_VALUE.toFixed(2));
-}); // CLOSES the first d3.csv block
+  } // closes drawPsychiatristsChart
 
+function drawSuicideChart(data) {
 // Load suicide rates data (chart 2)
-d3.csv("intentional_self_harm_per_100k_clean.csv").then(function(data) {
 console.log("Suicide CSV loaded:");
 console.log(data);
 
-// Convert OBS_VALUE to numbers
-data.forEach(function(d) {
-d.OBS_VALUE = +d.OBS_VALUE;
-});
-
-  // Filter for 2021 only
-var suicideData2021 = data.filter(d => d.TIME_PERIOD === "2021");
+var suicideData2021 = data;  // Use already-filtered data passed in
 
 // Set up chart dimensions
 var width2 = 1400;
@@ -187,4 +182,38 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
     .attr("text-anchor", "middle")
     .style("fill", "black")
     .text(d => d.OBS_VALUE.toFixed(1));
+}); // closes suicide chart
+
+// Listen for year change from dropdown
+d3.select("#yearSelect").on("change", function() {
+var selectedYear = this.value;
+updateCharts(selectedYear);
 });
+
+function updateCharts(selectedYear) {
+// Clear existing SVGs so we can redraw them
+d3.select("#chart1").selectAll("*").remove();
+d3.select("#chart2").selectAll("*").remove();
+
+// Reload both datasets and redraw for the selected year
+Promise.all([
+d3.csv("psychiatrists_per_1000_clean.csv"),
+d3.csv("intentional_self_harm_per_100k_clean.csv")
+]).then(function([psyData, suicideData]) {
+
+    // Convert numbers
+    psyData.forEach(d => d.OBS_VALUE = +d.OBS_VALUE);
+    suicideData.forEach(d => d.OBS_VALUE = +d.OBS_VALUE);
+
+    // Filter for the selected year
+    let filteredPsy = psyData.filter(d => d.TIME_PERIOD === selectedYear);
+    let filteredSuicide = suicideData.filter(d => d.TIME_PERIOD === selectedYear);
+
+    // Create both charts again
+    drawPsychiatristsChart(filteredPsy);
+    drawSuicideChart(filteredSuicide);
+  });
+}
+
+// Load initial charts with default year 2021
+updateCharts("2021");

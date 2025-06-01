@@ -1,7 +1,7 @@
 // COS30045 Data Visualisation
 // Group 01G
 
-function drawPsychiatristsChart(data2021) {
+function drawPsychiatristsChart(data) {
 
 // Set the size of the SVG area
 var width = 1400;
@@ -29,18 +29,14 @@ data.forEach(function(d) {
 d.OBS_VALUE = +d.OBS_VALUE;
 });
 
-// Filter for year 2021
-var data2021 = data.filter(d => d.TIME_PERIOD === "2021");
-// data2021 = data2021.slice(0, 10); // Debug: shows only 10 countries
-
 // X and Y scales
 var x = d3.scaleBand()
-.domain(data2021.map(d => d["Reference area"]))
+.domain(data.map(d => d["Reference area"]))
 .range([0, innerWidth])
 .padding(0.1);
 
 var y = d3.scaleLinear()
-.domain([0, d3.max(data2021, d => d.OBS_VALUE)])
+.domain([0, d3.max(data, d => d.OBS_VALUE)])
 .nice()
 .range([innerHeight, 0]);
 
@@ -75,7 +71,7 @@ svg.append("text")
 
 // Draw the bars
   chartArea.selectAll("rect")
-    .data(data2021)
+    .data(data)
     .enter()
     .append("rect")
 .attr("x", d => x(d["Reference area"]))
@@ -86,7 +82,7 @@ svg.append("text")
 
 // Add value labels above bars
 chartArea.selectAll(".label")
-  .data(data2021)
+  .data(data)
   .enter()
   .append("text")
   .attr("class", "label")

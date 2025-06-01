@@ -94,6 +94,7 @@ chartArea.selectAll(".label")
   .attr("text-anchor", "middle")
   .style("fill", "black")
   .text(d => d.OBS_VALUE.toFixed(2));
+}); // CLOSES the first d3.csv block
 
 // Load suicide rates data (chart 2)
 d3.csv("intentional_self_harm_per_100k_clean.csv").then(function(data) {

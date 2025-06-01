@@ -7,7 +7,7 @@ var height = 800;
 var margin = { top: 50, right: 30, bottom: 100, left: 60 };
 
 // Create the SVG element and add it to the page
-var svg = d3.select("#chart")
+var svg = d3.select("#chart1")
   .append("svg")
   .attr("width", width)
   .attr("height", height);
@@ -118,7 +118,7 @@ var innerWidth2 = width2 - margin2.left - margin2.right;
 var innerHeight2 = height2 - margin2.top - margin2.bottom;
 
   // Create new SVG for second chart
-  var svg2 = d3.select("#chart")
+  var svg2 = d3.select("#chart2")
     .append("svg")
     .attr("width", width2)
     .attr("height", height2);

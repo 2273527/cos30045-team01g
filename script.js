@@ -182,7 +182,7 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
     .attr("text-anchor", "middle")
     .style("fill", "black")
     .text(d => d.OBS_VALUE.toFixed(1));
-
+} // closes drawSuicideChart
 // Listen for year change from dropdown
 d3.select("#yearSelect").on("change", function() {
 var selectedYear = this.value;

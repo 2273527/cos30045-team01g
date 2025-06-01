@@ -95,9 +95,7 @@ chartArea.selectAll(".label")
   .style("fill", "black")
   .text(d => d.OBS_VALUE.toFixed(2));
 
-//
-
-// Load suicide rates data
+// Load suicide rates data (chart 2)
 d3.csv("intentional_self_harm_per_100k_clean.csv").then(function(data) {
 console.log("Suicide CSV loaded:");
 console.log(data);
@@ -108,7 +106,7 @@ d.OBS_VALUE = +d.OBS_VALUE;
 });
 
   // Filter for 2021 only
-  var data2021 = data.filter(d => d.TIME_PERIOD === "2021");
+var suicideData2021 = data.filter(d => d.TIME_PERIOD === "2021");
 
 // Set up chart dimensions
 var width2 = 1400;
@@ -128,12 +126,12 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
 
   // X and Y scales
   var x2 = d3.scaleBand()
-    .domain(data2021.map(d => d["Reference area"]))
+    .domain(suicideData2021.map(d => d["Reference area"]))
     .range([0, innerWidth2])
     .padding(0.1);
 
   var y2 = d3.scaleLinear()
-    .domain([0, d3.max(data2021, d => d.OBS_VALUE)])
+    .domain([0, d3.max(suicideData2021, d => d.OBS_VALUE)])
     .nice()
     .range([innerHeight2, 0]);
 
@@ -168,7 +166,7 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
 
   // Draw bars for each country
   chartArea2.selectAll("rect")
-    .data(data2021)
+    .data(suicideData2021)
     .enter()
     .append("rect")
     .attr("x", d => x2(d["Reference area"]))
@@ -179,7 +177,7 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
 
   // Add value labels above each bar
   chartArea2.selectAll(".label")
-    .data(data2021)
+    .data(suicideData2021)
     .enter()
     .append("text")
     .attr("class", "label")

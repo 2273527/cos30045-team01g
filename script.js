@@ -165,7 +165,7 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
     .attr("y", d => y2(d.OBS_VALUE))
     .attr("width", x2.bandwidth())
     .attr("height", d => innerHeight2 - y2(d.OBS_VALUE))
-    .attr("fill", "tomato");
+    .attr("fill", "skyblue");
 
   // Add value labels above each bar
   chartArea2.selectAll(".label")

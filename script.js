@@ -95,4 +95,97 @@ chartArea.selectAll(".label")
   .style("fill", "black")
   .text(d => d.OBS_VALUE.toFixed(2));
 
+//
+
+// Load suicide rates data
+d3.csv("intentional_self_harm_per_100k_clean.csv").then(function(data) {
+console.log("Suicide CSV loaded:");
+console.log(data);
+
+// Convert OBS_VALUE to numbers
+data.forEach(function(d) {
+d.OBS_VALUE = +d.OBS_VALUE;
+});
+
+  // Filter for 2021 only
+  var data2021 = data.filter(d => d.TIME_PERIOD === "2021");
+
+// Set up chart dimensions
+var width2 = 1400;
+var height2 = 800;
+var margin2 = { top: 50, right: 30, bottom: 100, left: 60 };
+var innerWidth2 = width2 - margin2.left - margin2.right;
+var innerHeight2 = height2 - margin2.top - margin2.bottom;
+
+  // Create new SVG for second chart
+  var svg2 = d3.select("#chart")
+    .append("svg")
+    .attr("width", width2)
+    .attr("height", height2);
+
+  var chartArea2 = svg2.append("g")
+    .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+  // X and Y scales
+  var x2 = d3.scaleBand()
+    .domain(data2021.map(d => d["Reference area"]))
+    .range([0, innerWidth2])
+    .padding(0.1);
+
+  var y2 = d3.scaleLinear()
+    .domain([0, d3.max(data2021, d => d.OBS_VALUE)])
+    .nice()
+    .range([innerHeight2, 0]);
+
+  // X Axis
+  chartArea2.append("g")
+    .attr("transform", "translate(0," + innerHeight2 + ")")
+    .call(d3.axisBottom(x2))
+    .selectAll("text")
+    .attr("transform", "rotate(-30)")
+    .style("text-anchor", "end");
+
+  // Y Axis
+  chartArea2.append("g")
+    .call(d3.axisLeft(y2));
+
+  // X Axis Label
+  svg2.append("text")
+    .attr("x", width2 / 2)
+    .attr("y", height2 - 10)
+    .attr("text-anchor", "middle")
+    .style("font-size", "14px")
+    .text("Country");
+
+  // Y Axis Label
+  svg2.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -height2 / 2)
+    .attr("y", 20)
+    .style("font-size", "14px")
+    .text("Suicides per 100,000 people");
+
+  // Draw bars for each country
+  chartArea2.selectAll("rect")
+    .data(data2021)
+    .enter()
+    .append("rect")
+    .attr("x", d => x2(d["Reference area"]))
+    .attr("y", d => y2(d.OBS_VALUE))
+    .attr("width", x2.bandwidth())
+    .attr("height", d => innerHeight2 - y2(d.OBS_VALUE))
+    .attr("fill", "tomato");
+
+  // Add value labels above each bar
+  chartArea2.selectAll(".label")
+    .data(data2021)
+    .enter()
+    .append("text")
+    .attr("class", "label")
+    .attr("x", d => x2(d["Reference area"]) + x2.bandwidth() / 2)
+    .attr("y", d => y2(d.OBS_VALUE) - 5)
+    .attr("text-anchor", "middle")
+    .style("fill", "black")
+    .text(d => d.OBS_VALUE.toFixed(1));
 });

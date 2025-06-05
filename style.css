@@ -17,6 +17,7 @@ footer {
 }
 
 #tooltip {
+  position: absolute;
   background: white;
   font-size: 13px;
   padding: 6px;

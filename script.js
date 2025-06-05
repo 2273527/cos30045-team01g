@@ -242,7 +242,5 @@ d3.csv("intentional_self_harm_per_100k_clean.csv")
 updateCharts("2021");
 
 // Create tooltip div
-var tooltip = d3.select("body")
-  .append("div")
-  .attr("id", "tooltip")
+var tooltip = d3.select("#tooltip")
   .style("opacity", 0);

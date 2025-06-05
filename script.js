@@ -78,22 +78,21 @@ svg.append("text")
     .attr("y", d => y(d.OBS_VALUE))
     .attr("width", x.bandwidth())
     .attr("height", d => innerHeight - y(d.OBS_VALUE))
-    .attr("fill", "skyblue");
-      // Tooltip when hovering over bars
-    .on("mouseover", function(event, d) {
-    // Show tooltip with country and value
-     tooltip.style("opacity", 1)
-     .text(d["Reference area"] + ": " + d.OBS_VALUE);
-    })
-    .on("mousemove", function(event) {
-     // Move tooltip near the mouse cursor
-     tooltip.style("left", (event.pageX + 10) + "px")
-     .style("top", (event.pageY - 10) + "px");
-    })
-    .on("mouseout", function() {
-      // Hide tooltip when mouse leaves
-      tooltip.style("opacity", 0);
-    });
+.attr("fill", "skyblue")
+.on("mouseover", function(event, d) {
+// Show tooltip with country and value
+tooltip.style("opacity", 1)
+.text(d["Reference area"] + ": " + d.OBS_VALUE);
+})
+.on("mousemove", function(event) {
+// Move tooltip near the mouse cursor
+tooltip.style("left", (event.pageX + 10) + "px")
+ .style("top", (event.pageY - 10) + "px");
+})
+.on("mouseout", function() {
+// Hide tooltip when mouse leaves
+tooltip.style("opacity", 0);
+});
 
 // Add value labels above bars
 chartArea.selectAll(".label")
@@ -180,22 +179,21 @@ var innerHeight2 = height2 - margin2.top - margin2.bottom;
     .attr("y", d => y2(d.OBS_VALUE))
     .attr("width", x2.bandwidth())
     .attr("height", d => innerHeight2 - y2(d.OBS_VALUE))
-    .attr("fill", "skyblue");
-    // Tooltip for hovering over bars 
-    .on("mouseover", function(event, d) {
-     // Show country and value in tooltip
-     tooltip.style("opacity", 1)
-     .text(d["Reference area"] + ": " + d.OBS_VALUE);
-    })
-    .on("mousemove", function(event) {
-    // Keep tooltip near mouse
-    tooltip.style("left", (event.pageX + 10) + "px")
-    .style("top", (event.pageY - 10) + "px");
-    })
-    .on("mouseout", function() {
-     // Hide tooltip again
-     tooltip.style("opacity", 0);
-     });
+.attr("fill", "skyblue")
+.on("mouseover", function(event, d) {
+// Show tooltip with country and value
+tooltip.style("opacity", 1)
+.text(d["Reference area"] + ": " + d.OBS_VALUE);
+})
+.on("mousemove", function(event) {
+// Move tooltip near the mouse cursor
+tooltip.style("left", (event.pageX + 10) + "px")
+.style("top", (event.pageY - 10) + "px");
+})
+.on("mouseout", function() {
+// Hide tooltip when mouse leaves
+tooltip.style("opacity", 0);
+});
 
   // Add value labels above each bar
   chartArea2.selectAll(".label")
